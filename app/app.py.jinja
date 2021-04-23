@@ -12,7 +12,7 @@ request_pool = ThreadPool(max_threads=50, min_threads=10)
 
 class App(EntryPoint):
     """jsonrpc项目的服务端启动入口."""
-    _name = "{{ project_name }}"
+    _name = "{{ app_name }}"
     schema = {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
@@ -28,7 +28,7 @@ class App(EntryPoint):
                 "type": "string",
                 "title": "n",
                 "description": "应用名",
-                "default": "{{ project_name }}"
+                "default": "{{ app_name }}"
             },
             "address": {
                 "type": "string",

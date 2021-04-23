@@ -1,20 +1,21 @@
 {
     "language": "py",
-    "description": "python自带的json-rpc的客户端和服务器模板",
-    "author": "hsz12",
-    "template_type": "server",
+    "mini_language_version": "3.6",
+    "description": "python的json-rpc的客户端和服务器模板",
+    "author": "hsz",
+    "template_type": "c&s",
     "requires": [
         "jsonrpclib-pelix >= 0.4.2",
         "schema_entry >= 0.1.5",
         "pyloggerhelper >= 0.0.2"
     ],
     "template_keys": {
-        "project_name_camelcase": {
-            "description": "",
+        "app_name_camelcase": {
+            "description": "服务应用名,默认为项目名称",
             "default": "{{ project_name | replace(\"_\", \" \") | replace(\"-\", \" \") | title | replace(\" \", \"\") }}"
         },
-        "project_name": {
-            "description": "",
+        "app_name": {
+            "description": "服务应用名的驼峰形式,默认为项目名称",
             "default": "{{ project_name }}"
         }
     },
@@ -25,7 +26,7 @@
             "default_path": "app"
         },
         "cli": {
-            "source": "cli.py",
+            "source": "cli.py.jinja",
             "description": "jsonrpc的客户端模板",
             "default_path": "{{ project_name | lower }}_cli.py"
         }
