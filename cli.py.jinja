@@ -1,0 +1,50 @@
+from typing import Optional
+from pyproxypattern import Proxy
+
+import jsonrpclib
+MultiCall = jsonrpclib.MultiCall
+
+
+class {{ project_name_camelcase }}Client(Proxy):
+    __slots__ = ('url', 'instance', '_callbacks', '_instance_check')
+    url: Optional[str]
+
+    def __init__(self, url: Optional[str] = None) -> None:
+        super().__init__()
+        self.instance = None
+        if url:
+            self.url = url
+            self.new_instance()
+        else:
+            self.url = None
+
+    def new_instance(self) -> None:
+        if not self.url:
+            raise AttributeError("need url!")
+        client = jsonrpclib.Server(self.url)
+        self.initialize(client)
+
+    def initialize_from_url(self, url: str) -> None:
+        """从url中初始化客户端
+        Args:
+            url ([type]): 目标服务的地址
+        """
+        self.url = url
+        self.new_instance()
+        for callback in self._callbacks:
+            callback(url)
+
+
+if __name__ == "__main__":
+    url = "http://localhost:5000"
+    cli = {{ project_name_camelcase }}Client(url)
+    print(cli.system.listMethods())
+    print(cli.add(123, 1))
+    print(cli.hello("hsz"))
+    with {{ project_name_camelcase }}Client(url) as s:
+        multi = MultiCall(s)
+        multi.add(1, 2)
+        multi.hello("qwe")
+        result = multi()
+        for i in result:
+            print(i)
