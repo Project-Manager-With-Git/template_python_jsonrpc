@@ -28,6 +28,11 @@
         "app_name": {
             "description": "服务应用名的驼峰形式,默认为项目名称",
             "default": "{{ project_name }}"
+        },
+        "dockerfile": {
+            "source": "cp_dockerfiles//python_singal_dockerfile",
+            "description": "jsonrpc打包为镜像的dockerfile",
+            "default_path": "dockerfile"
         }
     },
     "components": {
