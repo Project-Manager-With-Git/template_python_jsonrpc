@@ -17,7 +17,7 @@
         "pydocstyle>=6.0.0"
     ],
     "test":{
-        "source": "cp_python_test//simplerpc_tests",
+        "source": "cp_python_test@v0.0.1//simplerpc_tests",
         "default_path": "tests"
     },
     "template_keys": {
